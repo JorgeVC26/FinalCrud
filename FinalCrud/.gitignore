@@ -1,0 +1,20 @@
+﻿# Carpetas de compilación (Binarios)
+[Bb]in/
+[Oo]bj/
+
+# Archivos de usuario de Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+# Archivos de publicación
+publish/
+*.azurepubxml
+
+# Archivos temporales de Entity Framework
+*.log
+*.tmp
+
+# Configuración local (opcional, pero recomendado si tienes datos sensibles)
+appsettings.Development.json
