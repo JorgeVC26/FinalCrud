@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using FinalCrud.Data;
 using FinalCrud.Models;
 
+
 namespace FinalCrud.Controllers
 {
-    public class StudentsController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class StudentsController : ControllerBase
     {
         private readonly AppDbContext _context;
 
@@ -14,30 +16,18 @@ namespace FinalCrud.Controllers
             _context = context;
         }
 
-        // GET: Students
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public IActionResult Get()
         {
-            return View(await _context.Students.ToListAsync());
+            return Ok(_context.Students.ToList());
         }
 
-        // GET: Students/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Students/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email")] Student student)
+        public IActionResult Post(Student customer)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(student);
+            _context.Students.Add(customer);
+            _context.SaveChanges();
+            return Ok(customer);
         }
     }
 }
